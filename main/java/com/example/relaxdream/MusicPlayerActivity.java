@@ -23,7 +23,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageView pausePlay,nextBtn,previousBtn,musicIcon;
     ArrayList<AudioModel> songsList;
     AudioModel currentSong;
-    MediaPlayer mediaPlayer = com.example.easytutomusicapp.MyMediaPlayer.getInstance();
+    MediaPlayer mediaPlayer = com.example.relaxdream.MyMediaPlayer.getInstance();
     int x=0;
 
     @Override
@@ -89,7 +89,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     void setResourcesWithMusic(){
-        currentSong = songsList.get(com.example.easytutomusicapp.MyMediaPlayer.currentIndex);
+        currentSong = songsList.get(com.example.relaxdream.MyMediaPlayer.currentIndex);
 
         titleTv.setText(currentSong.getTitle());
 
@@ -123,18 +123,18 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     private void playNextSong(){
 
-        if(com.example.easytutomusicapp.MyMediaPlayer.currentIndex== songsList.size()-1)
+        if(com.example.relaxdream.MyMediaPlayer.currentIndex== songsList.size()-1)
             return;
-        com.example.easytutomusicapp.MyMediaPlayer.currentIndex +=1;
+        com.example.relaxdream.MyMediaPlayer.currentIndex +=1;
         mediaPlayer.reset();
         setResourcesWithMusic();
 
     }
 
     private void playPreviousSong(){
-        if(com.example.easytutomusicapp.MyMediaPlayer.currentIndex== 0)
+        if(com.example.relaxdream.MyMediaPlayer.currentIndex== 0)
             return;
-        com.example.easytutomusicapp.MyMediaPlayer.currentIndex -=1;
+        com.example.relaxdream.MyMediaPlayer.currentIndex -=1;
         mediaPlayer.reset();
         setResourcesWithMusic();
     }
