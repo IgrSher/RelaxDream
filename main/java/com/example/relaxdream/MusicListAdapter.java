@@ -38,7 +38,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
         AudioModel songData = songsList.get(position);
         holder.titleTextView.setText(songData.getTitle());
 
-        if(com.example.easytutomusicapp.MyMediaPlayer.currentIndex==position){
+        if(com.example.relaxdream.MyMediaPlayer.currentIndex==position){
             holder.titleTextView.setTextColor(Color.parseColor("#FF0000"));
         }else{
             holder.titleTextView.setTextColor(Color.parseColor("#000000"));
@@ -49,8 +49,8 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
             public void onClick(View v) {
                 //navigate to another acitivty
 
-                com.example.easytutomusicapp.MyMediaPlayer.getInstance().reset();
-                com.example.easytutomusicapp.MyMediaPlayer.currentIndex = position;
+                com.example.relaxdream.MyMediaPlayer.getInstance().reset();
+                com.example.relaxdream.MyMediaPlayer.currentIndex = position;
                 Intent intent = new Intent(context, com.example.relaxdream.MusicPlayerActivity.class);
                 intent.putExtra("LIST",songsList);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
