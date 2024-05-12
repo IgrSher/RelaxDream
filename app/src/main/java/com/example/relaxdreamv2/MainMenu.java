@@ -2,12 +2,15 @@ package com.example.relaxdreamv2;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
@@ -49,10 +52,8 @@ public class MainMenu extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_main_menu, container, false);
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Bundle category = new Bundle();
 
         ImageButton goToSongs = view.findViewById(R.id.songs);
@@ -60,20 +61,26 @@ public class MainMenu extends Fragment {
         ImageButton goToSounds = view.findViewById(R.id.sounds);
 
         goToSounds.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener);
+            category.putInt("category", 0);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
         });
 
         goToSongs.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener);
-            //category.putInt("category", 3);
-            //Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
+            category.putInt("category", 1);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
         });
 
         goToMelodies.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener);
-            //category.putInt("category", 2);
-            //Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
+            category.putInt("category", 2);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_main_menu, container, false);
+
         return view;
     }
 }

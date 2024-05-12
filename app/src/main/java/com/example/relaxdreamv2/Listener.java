@@ -1,6 +1,5 @@
 package com.example.relaxdreamv2;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -9,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
+import android.util.LogPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,11 @@ import android.widget.TextView;
  */
 public class Listener extends Fragment {
 
-    Button GoToList;
+    Button GoToList, GoToMenu;
     ImageButton Start, Pause, Next, Previous, Continue;
     MediaPlayer currentSound, song1, song2, song3;
-    MediaPlayer[] soundsList;
-    String[] songs;
+    MediaPlayer[] songList, melodyList, natureList;
+    String[] songs,melodies,natures;
     SeekBar songDuration;
 
     TextView currentTime, totalTime;
@@ -75,6 +76,7 @@ public class Listener extends Fragment {
         Previous = (ImageButton) view.findViewById(R.id.Previous);
         Continue = (ImageButton) view.findViewById(R.id.Continue);
         GoToList =  view.findViewById(R.id.goToList);
+        GoToMenu = view.findViewById(R.id.gotomain);
         song1 = MediaPlayer.create(getContext(), R.raw.onetime);
         song2 = MediaPlayer.create(getContext(), R.raw.spacesong);
         song3 = MediaPlayer.create(getContext(), R.raw.mortified);
@@ -83,11 +85,12 @@ public class Listener extends Fragment {
         currentTime = view.findViewById(R.id.currentTimer);
         totalTime = view.findViewById(R.id.totalTimer);
 
-
-        soundsList = new MediaPlayer[] {song1, song2, song3};
-        currentSound = soundsList[currentIndex];
+        currentIndex = getArguments().getInt("category");
+        songList = new MediaPlayer[] {song1, song2, song3};
+        currentSound = songList[currentIndex];
 
         songs = new String[] {"Marian Hill - One Time", "Beach House - Space Song", "L.Dre - Mortified"};
+        melodies = new String[] {};
         currentSongName = songs[currentIndex];
 
         Start.setOnClickListener(v -> {
@@ -114,7 +117,7 @@ public class Listener extends Fragment {
             if (currentIndex != 2){
                 soundStopButton(currentSound);
                 currentIndex+=1;
-                currentSound = soundsList[currentIndex];
+                currentSound = songList[currentIndex];
                 currentSongName = songs[currentIndex];
                 soundPlayButton(currentSound);
                 TextView name = (TextView) view.findViewById(R.id.songName);
@@ -123,25 +126,26 @@ public class Listener extends Fragment {
                 Continue.setVisibility(View.INVISIBLE);
                 onPrepared(currentSound);
                 songDuration.setProgress(0);
+                Navigation.findNavController(view).navigate(R.id.action_listener_to_mainMenu);
             }
             else {
                 currentIndex = 0;
                 soundStopButton(currentSound);
-                currentSound = soundsList[currentIndex];
+                currentSound = songList[currentIndex];
                 currentSongName = songs[currentIndex];
                 soundPlayButton(currentSound);
                 TextView name = (TextView) view.findViewById(R.id.songName);
                 name.setText(currentSongName);}
-            Pause.setVisibility(View.VISIBLE);
-            Continue.setVisibility(View.INVISIBLE);
-            onPrepared(currentSound);
-            songDuration.setProgress(0);
+                Pause.setVisibility(View.VISIBLE);
+                Continue.setVisibility(View.INVISIBLE);
+                onPrepared(currentSound);
+                songDuration.setProgress(0);
         });
         Previous.setOnClickListener(v -> {
             if (currentIndex != 0) {
                 soundStopButton(currentSound);
                 currentIndex -= 1;
-                currentSound = soundsList[currentIndex];
+                currentSound = songList[currentIndex];
                 currentSongName = songs[currentIndex];
                 soundPlayButton(currentSound);
                 TextView name = (TextView) view.findViewById(R.id.songName);
@@ -153,7 +157,7 @@ public class Listener extends Fragment {
             } else {
                 soundStopButton(currentSound);
                 currentIndex = 2;
-                currentSound = soundsList[currentIndex];
+                currentSound = songList[currentIndex];
                 currentSongName = songs[currentIndex];
                 soundPlayButton(currentSound);
                 TextView name = (TextView) view.findViewById(R.id.songName);
@@ -163,17 +167,20 @@ public class Listener extends Fragment {
                 onPrepared(currentSound);
                 songDuration.setProgress(0);
             }
+        });
             GoToList.setOnClickListener(v1 -> {
                 Navigation.findNavController(view).navigate(R.id.action_listener_to_songList);
             });
-        });
+            GoToMenu.setOnClickListener(v1 -> {
+                //currentSound.stop();
+                System.out.print(1);
+                Navigation.findNavController(view).navigate(R.id.action_listener_to_mainMenu);
+            });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listener, container, false);
-
-
     }
     private void soundPlayButton(MediaPlayer sound) {
         if (sound.isPlaying()){
@@ -208,7 +215,6 @@ public class Listener extends Fragment {
                 songDuration.postDelayed(onEverySecond, 1000);
                 currentTime.setText(createTimeLabel(currentSound.getCurrentPosition()));
             }
-            //currentIndex = getArguments().getInt("category");
         }
     };
     public String createTimeLabel(int duration) {
