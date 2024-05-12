@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonBlue" parent="ThemeOverlay.AppCompat">
+        <item name="android:colorAccent">@color/light_blue_A200</item>
+    </style>
+</resources>

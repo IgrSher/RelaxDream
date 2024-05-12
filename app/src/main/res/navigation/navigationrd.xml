@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigationrd"
+    app:startDestination="@id/mainMenu">
+
+    <fragment
+        android:id="@+id/mainMenu"
+        android:name="com.example.relaxdreamv2.MainMenu"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenu_to_listener"
+            app:destination="@id/listener" />
+        <argument
+            android:name="category"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_mainMenu_to_songList"
+            app:destination="@id/songList" />
+    </fragment>
+    <fragment
+        android:id="@+id/listener"
+        android:name="com.example.relaxdreamv2.Listener"
+        android:label="fragment_listener"
+        tools:layout="@layout/fragment_listener" >
+        <action
+            android:id="@+id/action_listener_to_mainMenu"
+            app:destination="@id/mainMenu" />
+        <action
+            android:id="@+id/action_listener_to_songList"
+            app:destination="@id/songList" />
+    </fragment>
+    <fragment
+        android:id="@+id/songList"
+        android:name="com.example.relaxdreamv2.SongList"
+        android:label="fragment_song_list"
+        tools:layout="@layout/fragment_song_list" />
+</navigation>
