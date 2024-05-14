@@ -82,7 +82,7 @@ public class ListenerMusic extends Fragment {
         totalTime = view.findViewById(R.id.totalTimer);
 
         currentIndex = 0;
-        melodyList = new MediaPlayer[] {song1, song2, song3};
+        melodyList = new MediaPlayer[] {song1, song2, song3,song4,song5};
         currentSound = melodyList[currentIndex];
 
         melodies = new String[] {"FKJ,(((O))) - Ylang Ylang","L.Dre - Gravity Falls","L.Dre - Mortified","Unknown","Unknown"};
