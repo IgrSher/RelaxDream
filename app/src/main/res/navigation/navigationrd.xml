@@ -14,8 +14,11 @@
             android:id="@+id/action_mainMenu_to_listener"
             app:destination="@id/listener" />
         <action
-            android:id="@+id/action_mainMenu_to_songList"
-            app:destination="@id/songList" />
+            android:id="@+id/action_mainMenu_to_listenerNature"
+            app:destination="@id/listenerNature" />
+        <action
+            android:id="@+id/action_mainMenu_to_listenerMusic"
+            app:destination="@id/listenerMusic" />
     </fragment>
     <fragment
         android:id="@+id/listener"
@@ -37,5 +40,66 @@
         android:id="@+id/songList"
         android:name="com.example.relaxdreamv2.SongList"
         android:label="fragment_song_list"
-        tools:layout="@layout/fragment_song_list" />
+        tools:layout="@layout/fragment_song_list" >
+        <action
+            android:id="@+id/action_songList_to_listener"
+            app:destination="@id/listener" />
+        <action
+            android:id="@+id/action_songList_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/listenerNature"
+        android:name="com.example.relaxdreamv2.ListenerNature"
+        android:label="fragment_listener_nature"
+        tools:layout="@layout/fragment_listener_nature" >
+        <action
+            android:id="@+id/action_listenerNature_to_mainMenu"
+            app:destination="@id/mainMenu" />
+        <action
+            android:id="@+id/action_listenerNature_to_natureList"
+            app:destination="@id/natureList" />
+        <action
+            android:id="@+id/action_listenerNature_to_natureList2"
+            app:destination="@id/natureList" />
+        <action
+            android:id="@+id/action_listenerNature_to_natureList3"
+            app:destination="@id/natureList" />
+    </fragment>
+    <fragment
+        android:id="@+id/listenerMusic"
+        android:name="com.example.relaxdreamv2.ListenerMusic"
+        android:label="fragment_listener_music"
+        tools:layout="@layout/fragment_listener_music" >
+        <action
+            android:id="@+id/action_listenerMusic_to_mainMenu"
+            app:destination="@id/mainMenu" />
+        <action
+            android:id="@+id/action_listenerMusic_to_melodyList"
+            app:destination="@id/melodyList" />
+    </fragment>
+    <fragment
+        android:id="@+id/melodyList"
+        android:name="com.example.relaxdreamv2.MelodyList"
+        android:label="fragment_melody_list"
+        tools:layout="@layout/fragment_melody_list" >
+        <action
+            android:id="@+id/action_melodyList_to_listenerMusic"
+            app:destination="@id/listenerMusic" />
+        <action
+            android:id="@+id/action_melodyList_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/natureList"
+        android:name="com.example.relaxdreamv2.NatureList"
+        android:label="fragment_nature_list"
+        tools:layout="@layout/fragment_nature_list" >
+        <action
+            android:id="@+id/action_natureList_to_listenerNature"
+            app:destination="@id/listenerNature" />
+        <action
+            android:id="@+id/action_natureList_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
 </navigation>

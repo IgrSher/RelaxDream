@@ -18,18 +18,14 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Listener#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Listener extends Fragment {
 
     Button GoToList, GoToMenu;
     ImageButton Start, Pause, Next, Previous, Continue;
     MediaPlayer currentSound, song1, song2, song3;
-    MediaPlayer[] songList, melodyList, natureList;
-    String[] songs,melodies,natures;
+    MediaPlayer[] songList;
+    String[] songs;
     SeekBar songDuration;
 
     TextView currentTime, totalTime;
@@ -85,12 +81,11 @@ public class Listener extends Fragment {
         currentTime = view.findViewById(R.id.currentTimer);
         totalTime = view.findViewById(R.id.totalTimer);
 
-        currentIndex = getArguments().getInt("category");
+        currentIndex = 0;
         songList = new MediaPlayer[] {song1, song2, song3};
         currentSound = songList[currentIndex];
 
         songs = new String[] {"Marian Hill - One Time", "Beach House - Space Song", "L.Dre - Mortified"};
-        melodies = new String[] {};
         currentSongName = songs[currentIndex];
 
         Start.setOnClickListener(v -> {
@@ -126,7 +121,6 @@ public class Listener extends Fragment {
                 Continue.setVisibility(View.INVISIBLE);
                 onPrepared(currentSound);
                 songDuration.setProgress(0);
-                Navigation.findNavController(view).navigate(R.id.action_listener_to_mainMenu);
             }
             else {
                 currentIndex = 0;
@@ -136,10 +130,10 @@ public class Listener extends Fragment {
                 soundPlayButton(currentSound);
                 TextView name = (TextView) view.findViewById(R.id.songName);
                 name.setText(currentSongName);}
-                Pause.setVisibility(View.VISIBLE);
-                Continue.setVisibility(View.INVISIBLE);
-                onPrepared(currentSound);
-                songDuration.setProgress(0);
+            Pause.setVisibility(View.VISIBLE);
+            Continue.setVisibility(View.INVISIBLE);
+            onPrepared(currentSound);
+            songDuration.setProgress(0);
         });
         Previous.setOnClickListener(v -> {
             if (currentIndex != 0) {
@@ -168,14 +162,13 @@ public class Listener extends Fragment {
                 songDuration.setProgress(0);
             }
         });
-            GoToList.setOnClickListener(v1 -> {
-                Navigation.findNavController(view).navigate(R.id.action_listener_to_songList);
-            });
-            GoToMenu.setOnClickListener(v1 -> {
-                //currentSound.stop();
-                System.out.print(1);
-                Navigation.findNavController(view).navigate(R.id.action_listener_to_mainMenu);
-            });
+        GoToList.setOnClickListener(v1 -> {
+            Navigation.findNavController(view).navigate(R.id.action_listener_to_songList);
+        });
+        GoToMenu.setOnClickListener(v1 -> {
+            currentSound.stop();
+            Navigation.findNavController(view).navigate(R.id.action_listener_to_mainMenu);
+        });
     }
 
     @Override

@@ -61,18 +61,15 @@ public class MainMenu extends Fragment {
         ImageButton goToSounds = view.findViewById(R.id.sounds);
 
         goToSounds.setOnClickListener(v -> {
-            category.putInt("category", 0);
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listenerNature);
         });
 
         goToSongs.setOnClickListener(v -> {
-            category.putInt("category", 1);
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener);
         });
 
         goToMelodies.setOnClickListener(v -> {
-            category.putInt("category", 2);
-            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listener, category);
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_listenerMusic);
         });
     }
 
