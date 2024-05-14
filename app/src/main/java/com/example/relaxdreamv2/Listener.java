@@ -23,7 +23,7 @@ public class Listener extends Fragment {
 
     Button GoToList, GoToMenu;
     ImageButton Start, Pause, Next, Previous, Continue;
-    MediaPlayer currentSound, song1, song2, song3;
+    MediaPlayer currentSound, song1, song2, song3,song4,song5;
     MediaPlayer[] songList;
     String[] songs;
     SeekBar songDuration;
@@ -75,7 +75,9 @@ public class Listener extends Fragment {
         GoToMenu = view.findViewById(R.id.gotomain);
         song1 = MediaPlayer.create(getContext(), R.raw.onetime);
         song2 = MediaPlayer.create(getContext(), R.raw.spacesong);
-        song3 = MediaPlayer.create(getContext(), R.raw.mortified);
+        song3 = MediaPlayer.create(getContext(), R.raw.solost);
+        song4 = MediaPlayer.create(getContext(), R.raw.emssion);
+        song5 = MediaPlayer.create(getContext(), R.raw.waste);
 
         songDuration = view.findViewById(R.id.songDuration);
         currentTime = view.findViewById(R.id.currentTimer);
@@ -85,7 +87,7 @@ public class Listener extends Fragment {
         songList = new MediaPlayer[] {song1, song2, song3};
         currentSound = songList[currentIndex];
 
-        songs = new String[] {"Marian Hill - One Time", "Beach House - Space Song", "L.Dre - Mortified"};
+        songs = new String[] {"Marian Hill - One Time", "Beach House - Space Song", "Blank Shiloh - So Lost", "Silver Maple - Particle Emission", "Kxllswxtch - Waste"};
         currentSongName = songs[currentIndex];
 
         Start.setOnClickListener(v -> {
@@ -109,7 +111,7 @@ public class Listener extends Fragment {
             onPrepared(currentSound);
         });
         Next.setOnClickListener(v -> {
-            if (currentIndex != 2){
+            if (currentIndex != 4){
                 soundStopButton(currentSound);
                 currentIndex+=1;
                 currentSound = songList[currentIndex];
@@ -150,7 +152,7 @@ public class Listener extends Fragment {
                 songDuration.setProgress(0);
             } else {
                 soundStopButton(currentSound);
-                currentIndex = 2;
+                currentIndex = 4;
                 currentSound = songList[currentIndex];
                 currentSongName = songs[currentIndex];
                 soundPlayButton(currentSound);

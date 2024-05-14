@@ -67,7 +67,7 @@ public class ListenerNature extends Fragment {
         songList = new MediaPlayer[] {song1, song2, song3,song4,song5};
         currentSound = songList[currentIndex];
 
-        natures = new String[] {"", "", "","",""};
+        natures = new String[] {"Потрескивающий Огонь", "Вечерний лес", "Глубоко в лесу","Ночные птицы","Осенние птицы"};
         currentSongName = natures[currentIndex];
 
         Start.setOnClickListener(v -> {
