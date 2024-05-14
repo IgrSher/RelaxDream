@@ -84,7 +84,7 @@ public class Listener extends Fragment {
         totalTime = view.findViewById(R.id.totalTimer);
 
         currentIndex = 0;
-        songList = new MediaPlayer[] {song1, song2, song3};
+        songList = new MediaPlayer[] {song1, song2, song3,song4,song5};
         currentSound = songList[currentIndex];
 
         songs = new String[] {"Marian Hill - One Time", "Beach House - Space Song", "Blank Shiloh - So Lost", "Silver Maple - Particle Emission", "Kxllswxtch - Waste"};
